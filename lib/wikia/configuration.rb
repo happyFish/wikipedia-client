@@ -1,6 +1,6 @@
 require 'singleton'
 
-module Wikipedia
+module Wikia
   class Configuration
     include Singleton
 

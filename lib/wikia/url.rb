@@ -1,4 +1,4 @@
-module Wikipedia
+module Wikia
   class Url
     def initialize(wiki_url)
       @wiki_url = wiki_url

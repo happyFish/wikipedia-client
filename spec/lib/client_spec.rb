@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 require 'json'
 
-describe Wikipedia::Client, ".find page (mocked)" do
+describe Wikia::Client, ".find page (mocked)" do
   before(:each) do
-    @client = Wikipedia::Client.new
+    @client = Wikia::Client.new
     @edsger_dijkstra = File.read(File.dirname(__FILE__) + '/../fixtures/Edsger_Dijkstra.json')
     @edsger_content  = JSON::load(File.read(File.dirname(__FILE__) + '/../fixtures/Edsger_content.txt'))['content']
     @client.should_receive(:request).and_return(@edsger_dijkstra)
@@ -14,7 +14,7 @@ describe Wikipedia::Client, ".find page (mocked)" do
   end
 
   it "should return a page object" do
-    @client.find('Edsger_Dijkstra').should be_an_instance_of(Wikipedia::Page)
+    @client.find('Edsger_Dijkstra').should be_an_instance_of(Wikia::Page)
   end
 
   it "should return a page with the correct content" do
@@ -43,9 +43,9 @@ describe Wikipedia::Client, ".find page (mocked)" do
   end
 end
 
-describe Wikipedia::Client, ".find page with one section (mocked)" do
+describe Wikia::Client, ".find page with one section (mocked)" do
   before(:each) do
-    @client = Wikipedia::Client.new
+    @client = Wikia::Client.new
     @edsger_dijkstra = File.read(File.dirname(__FILE__) + '/../fixtures/Edsger_Dijkstra_section_0.json')
     @edsger_content = File.read(File.dirname(__FILE__) + '/../fixtures/sanitization_samples/Edsger_W_Dijkstra-sanitized.txt').strip
     @client.should_receive(:request).and_return(@edsger_dijkstra)
@@ -57,9 +57,9 @@ describe Wikipedia::Client, ".find page with one section (mocked)" do
   end
 end
 
-describe Wikipedia::Client, ".find image (mocked)" do
+describe Wikia::Client, ".find image (mocked)" do
   before(:each) do
-    @client = Wikipedia::Client.new
+    @client = Wikia::Client.new
     @edsger_dijkstra = File.read(File.dirname(__FILE__) + '/../fixtures/File_Edsger_Wybe_Dijkstra_jpg.json')
     @client.should_receive(:request).and_return(@edsger_dijkstra)
   end
@@ -69,7 +69,7 @@ describe Wikipedia::Client, ".find image (mocked)" do
   end
 
   it "should return a page object" do
-    @client.find_image('File:Edsger Wybe Dijkstra.jpg').should be_an_instance_of(Wikipedia::Page)
+    @client.find_image('File:Edsger Wybe Dijkstra.jpg').should be_an_instance_of(Wikia::Page)
   end
 
   it "should return a page with a title of File:Edsger Wybe Dijkstra.jpg" do
@@ -79,13 +79,13 @@ describe Wikipedia::Client, ".find image (mocked)" do
 
   it "should return a page with an image url" do
     @page = @client.find_image('File:Edsger Wybe Dijkstra.jpg')
-    @page.image_url.should == "http://upload.wikimedia.org/wikipedia/commons/d/d9/Edsger_Wybe_Dijkstra.jpg"
+    @page.image_url.should == "http://upload.wikimedia.org/wikia/commons/d/d9/Edsger_Wybe_Dijkstra.jpg"
   end
 end
 
-describe Wikipedia::Client, ".find page (Edsger_Dijkstra)" do
+describe Wikia::Client, ".find page (Edsger_Dijkstra)" do
   before(:each) do
-    @client = Wikipedia::Client.new
+    @client = Wikia::Client.new
     @client.follow_redirects = false
   end
 
@@ -103,6 +103,6 @@ describe Wikipedia::Client, ".find page (Edsger_Dijkstra)" do
   it "should collect the image urls" do
     @client.follow_redirects = true
     @page = @client.find('Edsger Dijkstra')
-    @page.image_urls.should == ["http://upload.wikimedia.org/wikipedia/commons/c/c9/Edsger_Dijkstra_1994.jpg", "http://upload.wikimedia.org/wikipedia/commons/d/d9/Edsger_Wybe_Dijkstra.jpg"]
+    @page.image_urls.should == ["http://upload.wikimedia.org/wikia/commons/c/c9/Edsger_Dijkstra_1994.jpg", "http://upload.wikimedia.org/wikia/commons/d/d9/Edsger_Wybe_Dijkstra.jpg"]
   end
 end

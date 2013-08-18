@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "wikipedia-client"
-  s.version = "1.3.0"
+  s.name = "wikia-client"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Cyril David", "Ken Pratt", "Mike Haugland"]
-  s.date = "2013-06-30"
-  s.description = "Ruby client for the Wikipedia API"
-  s.email = "mike.haugland@gmail.com"
+  s.authors = ["Chris Roush", "Cyril David", "Ken Pratt", "Mike Haugland"]
+  s.date = "2013-08-16"
+  s.description = "Ruby client for the Wikia API, Based on wikia-client"
+  s.email = "roush.chris@gmail.com"
   s.extra_rdoc_files = [
     "README.textile"
   ]
@@ -22,11 +22,13 @@ Gem::Specification.new do |s|
     "VERSION",
     "init.rb",
     "install.rb",
-    "lib/wikipedia.rb",
-    "lib/wikipedia/client.rb",
-    "lib/wikipedia/configuration.rb",
-    "lib/wikipedia/page.rb",
-    "lib/wikipedia/url.rb",
+    "lib/wikia.rb",
+    "lib/wikia/client.rb",
+    "lib/wikia/configuration.rb",
+    "lib/wikia/page.rb",
+    "lib/wikia/categories.rb",
+    "lib/wikia/pages.rb",
+    "lib/wikia/url.rb",
     "script/add_sanitization_test",
     "spec/fixtures/Edsger_Dijkstra.json",
     "spec/fixtures/Edsger_Dijkstra.yaml",
@@ -60,16 +62,16 @@ Gem::Specification.new do |s|
     "spec/lib/client_spec.rb",
     "spec/lib/sanitize_spec.rb",
     "spec/lib/url_spec.rb",
-    "spec/lib/wikipedia_spec.rb",
+    "spec/lib/wikia_spec.rb",
     "spec/spec_helper.rb",
-    "tasks/wikipedia_tasks.rake",
+    "tasks/wikia_tasks.rake",
     "uninstall.rb",
-    "wikipedia-client.gemspec"
+    "wikia-client.gemspec"
   ]
-  s.homepage = "http://github.com/mhaugland/wikipedia-client"
+  s.homepage = "http://github.com/happyFish/wikia-client"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.23"
-  s.summary = "Ruby client for the Wikipedia API"
+  s.summary = "Ruby client for the Wikia API"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

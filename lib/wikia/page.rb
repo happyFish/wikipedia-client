@@ -1,4 +1,4 @@
-module Wikipedia
+module Wikia
   class Page
     def initialize(json)
       require 'json'
@@ -76,7 +76,7 @@ module Wikipedia
       unless @cached_image_metadata
         if list = images
           filtered = list.select {|i| i =~ /^file:.+\.(jpg|jpeg|png|gif)$/i && !i.include?("LinkFA-star") }
-          @cached_image_metadata = filtered.map {|title| Wikipedia.find_image(title) }
+          @cached_image_metadata = filtered.map {|title| Wikia.find_image(title) }
         end
       end
       @cached_image_metadata || []

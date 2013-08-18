@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "wikipedia-client"
-    gem.summary = %Q{Ruby client for the Wikipedia API}
-    gem.description = %Q{Ruby client for the Wikipedia API}
+    gem.name = "wikia-client"
+    gem.summary = %Q{Ruby client for the Wikia API}
+    gem.description = %Q{Ruby client for the Wikia API}
     gem.email = "mike.haugland@gmail.com"
-    gem.homepage = "http://github.com/mhaugland/wikipedia-client"
+    gem.homepage = "http://github.com/mhaugland/wikia-client"
     gem.authors = ["Cyril David", "Ken Pratt", "Mike Haugland"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
@@ -26,7 +26,7 @@ Rake::TestTask.new(:test) do |test|
 end
 
 
-desc 'Test the wikipedia plugin.'
+desc 'Test the wikia plugin.'
 task :spec do
   spec_path = File.expand_path(File.dirname(__FILE__) + '/spec/**/*.rb')
   system("rspec -cfs #{spec_path}")
@@ -54,7 +54,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "wikipedia-client #{version}"
+  rdoc.title = "wikia-client #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

@@ -1,9 +1,9 @@
-module Wikipedia
+module Wikia
   class Client
-    # see http://en.wikipedia.org/w/api.php
+    # see http://en.wikia.org/w/api.php
     BASE_URL = ":protocol://:domain/:path?action=:action&format=json"
 
-    attr_accessor :follow_redirects
+    attr_accessor :follow_redirects, :categories, :pages
 
     def initialize
       self.follow_redirects = true
@@ -23,7 +23,27 @@ module Wikipedia
       Page.new( request_image( title, options ) )
     end
 
-    # http://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions%7Clinks%7Cimages%7Ccategories&rvprop=content&titles=Flower%20(video%20game)
+    def list_categories(options = {})
+      @categories = Categories.new( request({
+          :action => "query",
+          :list => 'allcategories',
+          :aclimit => 500,
+          :alnamespace => 14
+        }.merge(options) )
+      ).all
+    end
+
+    def all_pages(options = {})
+      @pages = Pages.new(
+        request({
+          :action => "query",
+          :list => 'allpages',
+          :aplimit => 500
+        }.merge(options) )
+      ).all
+    end
+
+    # http://en.wikia.org/w/api.php?action=query&format=json&prop=revisions%7Clinks%7Cimages%7Ccategories&rvprop=content&titles=Flower%20(video%20game)
     def request_page( title, options = {} )
       request( {
                  :action => "query",
@@ -33,7 +53,7 @@ module Wikipedia
                }.merge( options ) )
     end
 
-    # http://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&titles=File:Flower.png
+    # http://en.wikia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&titles=File:Flower.png
     def request_image( title, options = {} )
       request( {
                  :action => "query",
@@ -45,6 +65,7 @@ module Wikipedia
 
     def request( options )
       require 'open-uri'
+      puts url_for( options )
       URI.parse( url_for( options ) ).read( "User-Agent" => "Ruby/#{RUBY_VERSION}" )
     end
 
